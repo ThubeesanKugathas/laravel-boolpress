@@ -27,3 +27,4 @@ Route::middleware('auth')
         Route::get('/', 'HomeController@index')->name('home');
     });
 
+//  todo after rivisto tutta la lezione
