@@ -5,9 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class PostController extends Controller
-{
+{   
+
+    protected $postValidation = [
+        'title' => 'required|min:5',
+        'content' => 'required|min:20'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,7 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return view('admin.posts.index', compact('data'));
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -27,7 +35,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -38,7 +46,34 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate($this->postValidation);
+
+        $newPost = new Post();
+        $newPost->fill($data);
+
+        $postSlug = Str::slug($newPost->title);
+
+        $existSlug = Post::where('slug', $postSlug)->first();
+        $counter = 1;
+
+        while ($existSlug) {
+            $newSlug = $postSlug . '-' . $counter;
+            $counter++;
+
+            $existSlug = Post::where('slug', $postSlug)->first();
+
+            if(!$existSlug) {
+                $postSlug = $newSlug;
+            }
+            
+        }
+
+        $newPost->slug = $postSlug;
+
+        $newPost->save();
+
+        return redirect()->route('admin.posts.index');
+
     }
 
     /**
@@ -81,8 +116,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 }
