@@ -35,7 +35,7 @@
                         <select name="category_id" class="form-select" aria-label="Default select example">
                             <option value="">-- None --</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                                <option value="{{ $category->id }}" @if ($post->category->id === $category->id) selected @endif>{{ $category->categoryName }}</option>
                             @endforeach
                         </select>
                     </div>

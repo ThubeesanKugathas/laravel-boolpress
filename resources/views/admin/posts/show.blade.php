@@ -27,6 +27,7 @@
                         @if($post->category !== null)
                             Category: {{ $post->category->categoryName }}
                             <br>
+                            Description: {{ $post->category->categoryDescription }}
                         @endif
                     </div>
                 </div>
