@@ -18,10 +18,16 @@
                         {{ $post->content }}
                     </h4>
                     <div class="mt-3">
-                        Data creazione: {{ $post->created_at }}
+                        Creation date: {{ $post->created_at }}
                         <br>
-                        Data ultima modifica: {{ $post->updated_at }}
+                        Last update: {{ $post->updated_at }}
                         <br>
+                        Username: {{ $post->user->name }}
+                        <br>
+                        @if($post->category !== null)
+                            Category: {{ $post->category->categoryName }}
+                            <br>
+                        @endif
                     </div>
                 </div>
             </div>

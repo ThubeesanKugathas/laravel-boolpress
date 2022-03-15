@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
@@ -13,7 +15,8 @@ class PostController extends Controller
 
     protected $postValidation = [
         'title' => 'required|min:5',
-        'content' => 'required|min:20'
+        'content' => 'required|min:20',
+        'category_id' => 'nullable'
     ];
 
     /**
@@ -69,6 +72,7 @@ class PostController extends Controller
         }
 
         $newPost->slug = $postSlug;
+        $newPost->user_id = Auth::user()->id;
 
         $newPost->save();
 
@@ -98,8 +102,9 @@ class PostController extends Controller
     public function edit($slug)
     {
         $post = Post::where('slug', $slug)->first();
+        $categories = Category::all();
         
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
