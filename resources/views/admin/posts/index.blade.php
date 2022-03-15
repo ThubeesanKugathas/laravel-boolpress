@@ -14,8 +14,9 @@
                     <ul class="list-group">
                         @foreach($posts as $post)
                             <li class="list-group-item pe-auto d-flex">
-                                {{$post->title}}
-
+                                {{$post->title}} <br>
+                                By: {{ $post->user->name }} <br>
+                                Category: {{ $post->category->categoryName }}
                                 <a href="{{ route('admin.posts.show', $post->slug) }}" class="ms-auto me-3">Details</a>
                             </li>
                         @endforeach
