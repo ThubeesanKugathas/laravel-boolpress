@@ -13,13 +13,10 @@
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach($posts as $post)
-                            <li class="list-group-item pe-auto">
+                            <li class="list-group-item pe-auto d-flex">
                                 {{$post->title}}
 
-                                @include('admin.partials.deleteLinks', [
-                                    "route" => 'admin.posts.destroy',
-                                    "id" => $post->id
-                                ])
+                                <a href="{{ route('admin.posts.show', $post->slug) }}" class="ms-auto me-3">Details</a>
                             </li>
                         @endforeach
                     </ul>

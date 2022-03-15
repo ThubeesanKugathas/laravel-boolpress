@@ -1,6 +1,11 @@
 <template>
     <div>
-        <h1>HELLO WORLD</h1>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand ms-auto" href="/login">Login</a>
+                <a class="navbar-brand" href="/register">Register</a>
+            </div>
+        </nav>
     </div>
 </template>
 

@@ -101,6 +101,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -595,7 +600,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("HELLO WORLD")])])
+    return _c("div", [
+      _c("nav", { staticClass: "navbar navbar-light bg-light" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c(
+            "a",
+            { staticClass: "navbar-brand ms-auto", attrs: { href: "/login" } },
+            [_vm._v("Login")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "navbar-brand", attrs: { href: "/register" } },
+            [_vm._v("Register")]
+          ),
+        ]),
+      ]),
+    ])
   },
 ]
 render._withStripped = true
