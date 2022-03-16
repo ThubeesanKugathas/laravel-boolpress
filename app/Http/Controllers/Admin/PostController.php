@@ -119,15 +119,22 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
         $data = $request->validate($this->postValidation);
 
-        // dd($data);
+        $post = Post::findOrFail($id);
 
         $post->update($data);
 
-        
+        if (key_exists('tags', $data)) {
+
+            $post->tags()->detach();
+
+            $post->tags()->attach($data['tags']);
+
+            // $post->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $post->slug);
     }

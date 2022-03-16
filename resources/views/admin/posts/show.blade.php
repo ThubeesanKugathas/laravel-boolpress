@@ -30,10 +30,13 @@
                             Description: {{ $post->category->categoryDescription }}
                             <br>
                         @endif
-                        {{-- Tags: 
-                        @foreach($post->tags as $tag)
-                            {{ $tag }}, 
-                        @endforeach --}}
+
+                        {{-- @if($post->tags !== null)
+                            Tags: 
+                            @foreach($post->tags as $tag)
+                                {{ $tag }}, 
+                            @endforeach
+                        @endif --}}
                     </div>
                 </div>
             </div>
