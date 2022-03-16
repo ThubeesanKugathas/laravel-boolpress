@@ -17,9 +17,15 @@
                                 {{$post->title}} <br>
                                 By: {{ $post->user->name }} <br>
                                 @if($post->category !== null)
-                                    Category: {{ $post->category->categoryName }}
+                                    Category: {{ $post->category->categoryName }} <br>
                                 @else
-                                    Category: None
+                                    Category: None <br>
+                                @endif
+                                @if($post->tags !== null)
+                                    Tags: 
+                                    @foreach($post->tags as $tag)
+                                        #{{ $tag->tag_name }}
+                                    @endforeach
                                 @endif
                                 <a href="{{ route('admin.posts.show', $post->slug) }}" class="ms-auto me-3">Details</a>
                             </li>

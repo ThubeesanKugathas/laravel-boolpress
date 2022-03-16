@@ -119,11 +119,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         $data = $request->validate($this->postValidation);
-
-        $post = Post::findOrFail($id);
 
         $post->update($data);
 
@@ -147,6 +145,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach();
+
         $post->delete();
 
         return redirect()->route('admin.posts.index');

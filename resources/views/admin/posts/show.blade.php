@@ -31,12 +31,12 @@
                             <br>
                         @endif
 
-                        {{-- @if($post->tags !== null)
+                        @if($post->tags !== null)
                             Tags: 
                             @foreach($post->tags as $tag)
-                                {{ $tag }}, 
+                                #{{ $tag->tag_name }}
                             @endforeach
-                        @endif --}}
+                        @endif
                     </div>
                 </div>
             </div>
