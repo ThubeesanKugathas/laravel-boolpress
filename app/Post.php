@@ -10,7 +10,7 @@ class Post extends Model
         'title',
         'content',
         'category_id',
-        'slug'
+        'slug',
     ];
 
     public function user() {
@@ -19,5 +19,9 @@ class Post extends Model
 
     public function category() {
         return $this->belongsTo('App\Category');
+    }
+
+    public function tags() {
+        $this->belongsToMany('App\Tag');
     }
 }

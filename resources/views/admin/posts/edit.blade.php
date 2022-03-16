@@ -33,11 +33,23 @@
                     <div class="mb-3">
                         <label>Category</label>
                         <select name="category_id" class="form-select" aria-label="Default select example">
-                            <option value="">-- None --</option>
+                            <option value="" >-- None --</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}" @if ($post->category->id === $category->id) selected @endif>{{ $category->categoryName }}</option>
+                                <option value="{{ $category->id }}" >{{ $category->categoryName }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Tags: </label>
+                        @foreach($tags as $tag)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="tag_{{ $tag->id }}">
+                            <label class="form-check-label" for="tag_{{ $tag->id }}">
+                                {{ $tag->tag_name }}
+                            </label>
+                        </div>
+                        @endforeach
                     </div>
 
                     <div>

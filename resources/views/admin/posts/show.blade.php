@@ -28,7 +28,12 @@
                             Category: {{ $post->category->categoryName }}
                             <br>
                             Description: {{ $post->category->categoryDescription }}
+                            <br>
                         @endif
+                        {{-- Tags: 
+                        @foreach($post->tags as $tag)
+                            {{ $tag }}, 
+                        @endforeach --}}
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -16,7 +17,8 @@ class PostController extends Controller
     protected $postValidation = [
         'title' => 'required|min:5',
         'content' => 'required|min:20',
-        'category_id' => 'nullable'
+        'category_id' => 'nullable',
+        'tags' => 'nullable'
     ];
 
     /**
@@ -104,8 +106,10 @@ class PostController extends Controller
     {
         $post = Post::where('slug', $slug)->first();
         $categories = Category::all();
+        $tags = Tag::all();
+
         
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -119,7 +123,11 @@ class PostController extends Controller
     {
         $data = $request->validate($this->postValidation);
 
+        // dd($data);
+
         $post->update($data);
+
+        
 
         return redirect()->route('admin.posts.show', $post->slug);
     }
