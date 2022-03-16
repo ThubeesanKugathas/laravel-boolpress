@@ -41,7 +41,8 @@ class PostController extends Controller
     public function create()
     {   
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -78,6 +79,9 @@ class PostController extends Controller
         $newPost->user_id = Auth::user()->id;
 
         $newPost->save();
+
+        $newPost->tags()->attach($data['tags']);
+
 
         return redirect()->route('admin.posts.index');
 
