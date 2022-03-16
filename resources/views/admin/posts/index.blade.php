@@ -16,7 +16,11 @@
                             <li class="list-group-item pe-auto d-flex">
                                 {{$post->title}} <br>
                                 By: {{ $post->user->name }} <br>
-                                Category: {{ $post->category->categoryName }}
+                                @if($post->category !== null)
+                                    Category: {{ $post->category->categoryName }}
+                                @else
+                                    Category: None
+                                @endif
                                 <a href="{{ route('admin.posts.show', $post->slug) }}" class="ms-auto me-3">Details</a>
                             </li>
                         @endforeach
