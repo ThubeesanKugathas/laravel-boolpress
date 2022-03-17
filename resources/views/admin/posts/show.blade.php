@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+    // use Carbon\Carbon;
+    $dateFormat = 'd/m/Y H:i'
+@endphp
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="card">
@@ -18,9 +23,9 @@
                         {{ $post->content }}
                     </h4>
                     <div class="mt-3">
-                        Creation date: {{ $post->created_at->format('d-m-Y') }}
+                        Creation date: {{ $post->created_at->format($dateFormat) }}
                         <br>
-                        Last update: {{ $post->updated_at->format('d-m-Y') }}
+                        Last update: {{ $post->updated_at->format($dateFormat) }} ( {{ $post->updated_at->diffForHumans(Carbon\Carbon::now())}} )
                         <br>
                         Username: {{ $post->user->name }}
                         <br>
