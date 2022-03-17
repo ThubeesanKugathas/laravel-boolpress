@@ -30,6 +30,14 @@
                     </div>
 
                     <div class="mb-3">
+                        <label>Image</label>
+                        <input type="text" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image')}}" required>
+                        @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label>Category</label>
                         <select name="category_id" class="form-select" aria-label="Default select example">
                             <option value="">-- None --</option>

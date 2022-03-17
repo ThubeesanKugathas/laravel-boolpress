@@ -18,7 +18,8 @@ class PostController extends Controller
         'title' => 'required|min:5',
         'content' => 'required|min:20',
         'category_id' => 'nullable',
-        'tags' => 'nullable'
+        'tags' => 'nullable',
+        'image' => 'nullable'
     ];
 
     /**

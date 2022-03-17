@@ -37,10 +37,16 @@
                         @endif
 
                         @forelse($post->tags as $tag)
-                             #{{ $tag->tag_name }}
+                             #{{ $tag->tag_name }} 
                         @empty
                              --none-- 
                         @endforelse
+
+                        @if($post->image !== null)
+                            <br>
+                            <h4>Photo:</h4>
+                            <img src="https://unsplash.it/600/300?image={{ $post->image }}" alt="image">
+                        @endif
                     </div>
                 </div>
             </div>
