@@ -2,5 +2,5 @@
     @csrf
     @method('delete')
 
-    <button class="ms-3" type="submit">Delete</button>
+    <button class="btn btn-link text-danger p-0" type="submit"><i class="fa-solid fa-trash-can" title="delete"></i></button>
 </form>

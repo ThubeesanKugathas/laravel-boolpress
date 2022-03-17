@@ -11,8 +11,8 @@
         <div class="card">
             <div class="card-header d-flex">
                 {{ $post->title }}
-                <a href="{{route('admin.posts.index')}}" class="ms-auto">Back</a>
-                <a class="ms-3" href="{{ route('admin.posts.edit', $post->slug) }}">Change</a>
+                <a href="{{route('admin.posts.index')}}" class="ms-auto me-3">Back</a>
+                <a href="{{ route('admin.posts.edit', $post->slug) }}" class="me-3"><i class="fa-solid fa-pen-to-square" title="Change"></i></i></a>
                 @include('admin.partials.deleteLinks', [
                     "route" => 'admin.posts.destroy',
                     "id" => $post->id
@@ -36,7 +36,6 @@
                             <br>
                         @endif
 
-                        Tags: 
                         @forelse($post->tags as $tag)
                              #{{ $tag->tag_name }}
                         @empty

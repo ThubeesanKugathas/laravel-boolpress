@@ -21,13 +21,18 @@
                                 @else
                                     Category: None <br>
                                 @endif
-                                Tags: 
+
                                 @forelse($post->tags as $tag)
                                     #{{ $tag->tag_name }}
                                 @empty
                                     --none-- 
                                 @endforelse
-                                <a href="{{ route('admin.posts.show', $post->slug) }}" class="ms-auto me-3">Details</a>
+                                <a href="{{ route('admin.posts.show', $post->slug) }}" class="ms-auto me-3"><i class="fa-solid fa-eye" title="Details"></i></a>
+                                <a href="{{ route('admin.posts.edit', $post->slug) }}" class="me-3"><i class="fa-solid fa-pen-to-square" title="Change"></i></i></a>
+                                @include('admin.partials.deleteLinks', [
+                                    "route" => 'admin.posts.destroy',
+                                    "id" => $post->id
+                                ])
                             </li>
                         @endforeach
                     </ul>
