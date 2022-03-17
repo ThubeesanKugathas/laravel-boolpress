@@ -80,7 +80,9 @@ class PostController extends Controller
 
         $newPost->save();
 
-        $newPost->tags()->attach($data['tags']);
+        if (key_exists("tags", $data)) {
+            $newPost->tags()->attach($data["tags"]);
+        }
 
 
         return redirect()->route('admin.posts.index');
@@ -129,14 +131,19 @@ class PostController extends Controller
 
         $post->update($data);
 
-        if (key_exists('tags', $data)) {
+        if (key_exists('tags', $data) && count($data['tags']) !== 0) {
 
-            $post->tags()->detach();
+            // $post->tags()->detach();
 
-            $post->tags()->attach($data['tags']);
+            // $post->tags()->attach($data['tags']);
 
-            // $post->tags()->sync($data['tags']);
+            $post->tags()->sync($data['tags']);
+        
+        } else {
+            $post->tags()->sync([]);
         }
+
+        // dd($post);
 
         return redirect()->route('admin.posts.show', $post->slug);
     }

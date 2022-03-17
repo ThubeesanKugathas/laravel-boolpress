@@ -21,12 +21,12 @@
                                 @else
                                     Category: None <br>
                                 @endif
-                                @if($post->tags !== null)
-                                    Tags: 
-                                    @foreach($post->tags as $tag)
-                                        #{{ $tag->tag_name }}
-                                    @endforeach
-                                @endif
+                                Tags: 
+                                @forelse($post->tags as $tag)
+                                    #{{ $tag->tag_name }}
+                                @empty
+                                    --none-- 
+                                @endforelse
                                 <a href="{{ route('admin.posts.show', $post->slug) }}" class="ms-auto me-3">Details</a>
                             </li>
                         @endforeach

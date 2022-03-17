@@ -31,12 +31,12 @@
                             <br>
                         @endif
 
-                        @if($post->tags !== null)
-                            Tags: 
-                            @foreach($post->tags as $tag)
-                                #{{ $tag->tag_name }}
-                            @endforeach
-                        @endif
+                        Tags: 
+                        @forelse($post->tags as $tag)
+                             #{{ $tag->tag_name }}
+                        @empty
+                             --none-- 
+                        @endforelse
                     </div>
                 </div>
             </div>
