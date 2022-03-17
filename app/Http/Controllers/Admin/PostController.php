@@ -133,11 +133,11 @@ class PostController extends Controller
 
         if (key_exists('tags', $data) && count($data['tags']) !== 0) {
 
-            // $post->tags()->detach();
+            $post->tags()->detach();
 
-            // $post->tags()->attach($data['tags']);
+            $post->tags()->attach($data['tags']);
 
-            $post->tags()->sync($data['tags']);
+            // $post->tags()->sync($data['tags']);
         
         } else {
             $post->tags()->sync([]);
