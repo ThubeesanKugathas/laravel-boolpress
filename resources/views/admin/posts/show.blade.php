@@ -18,9 +18,9 @@
                         {{ $post->content }}
                     </h4>
                     <div class="mt-3">
-                        Creation date: {{ $post->created_at }}
+                        Creation date: {{ $post->created_at->format('d-m-Y') }}
                         <br>
-                        Last update: {{ $post->updated_at }}
+                        Last update: {{ $post->updated_at->format('d-m-Y') }}
                         <br>
                         Username: {{ $post->user->name }}
                         <br>
