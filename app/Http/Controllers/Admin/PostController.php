@@ -61,7 +61,6 @@ class PostController extends Controller
 
         $newPost = new Post();
         $newPost->fill($data);
-
         $newPost->slug = $this->generateSlug($data['title']);
         $newPost->user_id = Auth::user()->id;
 
@@ -70,7 +69,6 @@ class PostController extends Controller
         if (key_exists("tags", $data)) {
             $newPost->tags()->attach($data["tags"]);
         }
-
 
         return redirect()->route('admin.posts.index');
 

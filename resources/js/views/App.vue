@@ -1,17 +1,9 @@
 <template>
     <div>
-        <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand ms-auto" href="/login">Login</a>
-                <a class="navbar-brand" href="/register">Register</a>
-            </div>
-        </nav>
-
+        <the-navbar></the-navbar>
         <div class="container">
             <div class="row">
-                <div class="col" v-for="post of posts" :key="post.id" >
-                    {{ post.title }}
-                </div>
+                <post-card v-for="post of posts" :key="post.id" :post="post" class="col-5 mb-5"></post-card>
             </div>
         </div>
     </div>
@@ -19,10 +11,13 @@
 
 <script>
 import axios from "axios";
+import TheNavbar from '../components/TheNavbar.vue';
+import PostCard from '../components/PostCard.vue';
 
 export default {
     components: {
-        
+        TheNavbar,
+        PostCard,
     },
     data() {
         return {
@@ -30,11 +25,14 @@ export default {
         }
     },
     methods: {
-        getPosts() {
-            axios.get("http://127.0.0.1:8000/api/posts")
-                .then(response => {
-                    this.posts = response.data;
-                });
+        async getPosts() {
+            // axios.get("http://127.0.0.1:8000/api/posts")
+            //     .then(response => {
+            //         this.posts = response.data;
+            //     });
+
+            const response = await axios.get("http://127.0.0.1:8000/api/posts");
+            this.posts = response.data;
         }
     },
     mounted() {

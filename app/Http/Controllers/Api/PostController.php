@@ -21,6 +21,8 @@ class PostController extends Controller {
     public function index() {
         $posts = Post::all();
 
+        $posts->load('user', 'category', 'tags');
+
         // return response()->json([
         //     'response' => 'okay',
         //     'requestDate' => now(),
