@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
+use App\Traits\SlugGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -13,6 +14,8 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {   
+
+    use SlugGenerator;
 
     protected $postValidation = [
         'title' => 'required|min:5',
@@ -59,24 +62,7 @@ class PostController extends Controller
         $newPost = new Post();
         $newPost->fill($data);
 
-        $postSlug = Str::slug($newPost->title);
-
-        $existSlug = Post::where('slug', $postSlug)->first();
-        $counter = 1;
-
-        while ($existSlug) {
-            $newSlug = $postSlug . '-' . $counter;
-            $counter++;
-
-            $existSlug = Post::where('slug', $postSlug)->first();
-
-            if(!$existSlug) {
-                $postSlug = $newSlug;
-            }
-            
-        }
-
-        $newPost->slug = $postSlug;
+        $newPost->slug = $this->generateSlug($data['title']);
         $newPost->user_id = Auth::user()->id;
 
         $newPost->save();
