@@ -72,9 +72,9 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contact $contact)
     {
-        //
+        return view('admin.contacts.edit', compact('contact'));
     }
 
     /**
@@ -84,9 +84,13 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Contact $contact)
     {
-        //
+        $data = $request->validate($this->contactValidation);
+
+        $contact->update($data);
+
+        return redirect()->route('admin.contacts.index');
     }
 
     /**
