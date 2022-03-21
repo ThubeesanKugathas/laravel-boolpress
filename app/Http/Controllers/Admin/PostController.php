@@ -9,7 +9,6 @@ use App\Tag;
 use App\Traits\SlugGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 
 class PostController extends Controller

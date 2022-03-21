@@ -66,8 +66,9 @@
                                     </form>
                                 </div>
                             </li>
-                            <li>
-                                <a href="{{ route('admin.posts.index') }}" class="nav-link">Posts</a>
+                            <li class="d-flex">
+                                <a href="{{ route('admin.posts.index') }}" class="nav-link me-2">Posts</a>
+                                <a href="{{ route('admin.contacts.index') }}" class="nav-link">Contacts</a>
                             </li>
                         @endguest
                     </ul>
