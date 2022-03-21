@@ -8,7 +8,7 @@
                 <p class="card-text">By: {{ post.user.name }}</p>
                 <p class="card-text">{{ post.category.categoryName }}</p>
                 <span class="card-text" v-for="tag of post.tags" :key="tag.id">#{{ tag.tag_name }}</span> <br>
-                <a href="#" class="card-link">Details</a>
+                <router-link :to="{ name:'posts.show', params: { post: post.slug } }" >Details</router-link>
             </div>
         </div>
     </div>

@@ -48,11 +48,11 @@ class PostController extends Controller {
         return response()->json($newPost);
     }
 
-    public function show(Post $post) {
+    public function show($slug) {
 
-        // $post = Post::where("id", $id)->with(["tags", "user", "category"])->first(); NON INJECTION
+        $post = Post::where("slug", $slug)->with(["tags", "user", "category"])->first();
        
-        $post->load("tags", "user", "category");
+        // $post->load("tags", "user", "category");
 
         return response()->json($post);
     }
