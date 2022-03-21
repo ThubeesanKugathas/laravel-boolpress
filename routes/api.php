@@ -22,3 +22,4 @@ Route::get('/posts', 'Api\PostController@index');
 Route::post('/posts', 'Api\PostController@store');
 Route::get("/posts/{post}", "Api\PostController@show");
 
+Route::resource('contacts', 'Api\ContactController');
