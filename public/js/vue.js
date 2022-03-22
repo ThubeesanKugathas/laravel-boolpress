@@ -2026,15 +2026,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      contacts: []
+      formData: {
+        contact_name: "",
+        email: "",
+        content: ""
+      }
     };
   },
   methods: {
-    getContact: function getContact() {
+    submitContent: function submitContent() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -2044,13 +2060,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/contacts");
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this.formData);
 
               case 2:
                 response = _context.sent;
-                _this.contacts = response.data;
 
-              case 4:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -2058,9 +2073,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     }
-  },
-  mounted: function mounted() {
-    this.getContact();
   }
 });
 
@@ -4341,24 +4353,117 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {},
-    [
-      _c("h1", [_vm._v("Contacts")]),
+  return _c("div", {}, [
+    _c("h1", [_vm._v("Contacts")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "input-group mb-3" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_vm._v("Name")]
+      ),
       _vm._v(" "),
-      _vm._l(_vm.contacts, function (contact) {
-        return _c("ul", { key: contact.id, staticClass: "mb-3" }, [
-          _c("li", [
-            _c("h3", [_vm._v("Name:" + _vm._s(contact.contact_name))]),
-            _vm._v(" "),
-            _c("h3", [_vm._v("Email:" + _vm._s(contact.email))]),
-          ]),
-        ])
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.formData.contact_name,
+            expression: "formData.contact_name",
+          },
+        ],
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          placeholder: "Name",
+          "aria-label": "Name",
+          "aria-describedby": "basic-addon1",
+        },
+        domProps: { value: _vm.formData.contact_name },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.formData, "contact_name", $event.target.value)
+          },
+        },
       }),
-    ],
-    2
-  )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "input-group mb-3" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_vm._v("Email")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.formData.email,
+            expression: "formData.email",
+          },
+        ],
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          placeholder: "Email",
+          "aria-label": "Email",
+          "aria-describedby": "basic-addon1",
+        },
+        domProps: { value: _vm.formData.email },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.formData, "email", $event.target.value)
+          },
+        },
+      }),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "input-group mb-3" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("Content")]),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.formData.content,
+            expression: "formData.content",
+          },
+        ],
+        staticClass: "form-control",
+        attrs: { "aria-label": "Content" },
+        domProps: { value: _vm.formData.content },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.formData, "content", $event.target.value)
+          },
+        },
+      }),
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { type: "submit" },
+          on: { click: _vm.submitContent },
+        },
+        [_vm._v("Save")]
+      ),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

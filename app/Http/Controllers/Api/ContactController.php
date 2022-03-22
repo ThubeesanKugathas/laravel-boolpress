@@ -11,7 +11,8 @@ class ContactController extends Controller
 
     protected $contactValidation = [
         'contact_name' => 'required|min:5',
-        'email' => 'required|email'
+        'email' => 'required|email',
+        'content' => 'required'
     ];
 
     /**
@@ -21,9 +22,9 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        // $contacts = Contact::all();
 
-        return response()->json($contacts);
+        // return response()->json($contacts);
     }
 
     /**
@@ -44,7 +45,12 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate($this->contactValidation);
+
+        $newContact = new Contact();
+        $newContact->fill($data);
+
+        $newContact->save();
     }
 
     /**
