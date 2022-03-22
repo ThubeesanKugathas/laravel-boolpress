@@ -1965,16 +1965,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      routes: []
+      routes: [],
+      user: null
     };
+  },
+  methods: {
+    getUser: function getUser() {
+      var _this = this;
+
+      axios.get("/api/user").then(function (response) {
+        console.log(response.data);
+        _this.user = response.data;
+      })["catch"](function (er) {
+        console.error('User not logged');
+      });
+    }
   },
   mounted: function mounted() {
     this.routes = this.$router.getRoutes().filter(function (route) {
       return !!route.meta.linkText;
     });
+    this.getUser();
   }
 });
 
@@ -4259,15 +4274,31 @@ var render = function () {
       "div",
       { staticClass: "container-fluid" },
       [
-        _c(
-          "a",
-          { staticClass: "navbar-brand ms-auto", attrs: { href: "/login" } },
-          [_vm._v("Login")]
-        ),
+        !_vm.user
+          ? _c(
+              "a",
+              {
+                staticClass: "navbar-brand ms-auto",
+                attrs: { href: "/login" },
+              },
+              [_vm._v(" Login ")]
+            )
+          : _c(
+              "a",
+              {
+                staticClass: "navbar-brand ms-auto",
+                attrs: { href: "/admin" },
+              },
+              [_vm._v(" " + _vm._s(_vm.user.name) + " ")]
+            ),
         _vm._v(" "),
-        _c("a", { staticClass: "navbar-brand", attrs: { href: "/register" } }, [
-          _vm._v("Register"),
-        ]),
+        !_vm.user
+          ? _c(
+              "a",
+              { staticClass: "navbar-brand", attrs: { href: "/register" } },
+              [_vm._v("Register")]
+            )
+          : _vm._e(),
         _vm._v(" "),
         _vm._l(_vm.routes, function (route) {
           return _c(
