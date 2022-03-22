@@ -23,11 +23,14 @@ export default {
         getUser() {
             axios.get("/api/user")
             .then(response => {
-                console.log(response.data);
                 this.user = response.data;
+
+                localStorage.setItem('user', JSON.stringify(response.data))
             })
             .catch((er) => {
                 console.error('User not logged');
+
+                localStorage.removeItem("user");
             });
         }
     },

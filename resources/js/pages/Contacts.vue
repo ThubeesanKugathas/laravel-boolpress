@@ -39,7 +39,6 @@ export default {
     async submitContent() {
       const response = await axios.post("/api/contacts", this.formData);
 
-      // response.data;
     }
   },
 }
