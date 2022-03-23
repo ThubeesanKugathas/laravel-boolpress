@@ -28,6 +28,11 @@ class PostController extends Controller {
         //     'requestDate' => now(),
         //     'data' => $posts
         // ]);
+        $posts->each(function ($post) {
+            if($post->image) {
+                $post->image = asset('storage/' . $post->image);
+            }
+        });
 
         return response()->json($posts);
     }

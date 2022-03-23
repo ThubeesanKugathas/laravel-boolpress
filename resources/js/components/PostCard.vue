@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="card">
-            <img :src="`https://unsplash.it/600/300?image=${post.image}`" class="card-img-top" alt="">
+            <img :src="post.image" class="card-img-top" alt="">
             <div class="card-body">
                 <h5 class="card-title">{{ post.title }}</h5>
                 <p class="card-text">{{ post.content }}</p>

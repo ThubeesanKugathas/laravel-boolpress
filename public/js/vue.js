@@ -2078,6 +2078,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2085,7 +2090,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       formData: {
         contact_name: "",
         email: "",
-        content: ""
+        content: "",
+        attachment: null
       }
     };
   },
@@ -2094,24 +2100,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
+        var formDataInstance, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this.formData);
+                formDataInstance = new FormData();
+                formDataInstance.append('contact_name', _this.formData.contact_name);
+                formDataInstance.append('email', _this.formData.email);
+                formDataInstance.append('content', _this.formData.content);
+                formDataInstance.append('attachment', _this.formData.attachment);
+                _context.next = 7;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", formDataInstance);
 
-              case 2:
+              case 7:
                 response = _context.sent;
 
-              case 3:
+              case 8:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    onChangeAttachmentFile: function onChangeAttachmentFile(event) {
+      // event.target.files
+      this.formData.attachment = event.target.files[0];
     }
   }
 });
@@ -4254,10 +4269,7 @@ var render = function () {
     _c("div", { staticClass: "card" }, [
       _c("img", {
         staticClass: "card-img-top",
-        attrs: {
-          src: "https://unsplash.it/600/300?image=" + _vm.post.image,
-          alt: "",
-        },
+        attrs: { src: _vm.post.image, alt: "" },
       }),
       _vm._v(" "),
       _c(
@@ -4524,6 +4536,25 @@ var render = function () {
       }),
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "input-group mb-3" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_vm._v("Attachment")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "file",
+          placeholder: "Attachment",
+          "aria-label": "Attachment",
+          "aria-describedby": "basic-addon1",
+        },
+        on: { change: _vm.onChangeAttachmentFile },
+      }),
+    ]),
+    _vm._v(" "),
     _c("div", [
       _c(
         "button",
@@ -4693,10 +4724,7 @@ var render = function () {
       _vm._v(" "),
       _c("img", {
         staticClass: "card-img-top",
-        attrs: {
-          src: "https://unsplash.it/600/300?image=" + _vm.post.image,
-          alt: "",
-        },
+        attrs: { src: _vm.post.image, alt: "" },
       }),
       _vm._v(" "),
       _c("p", { staticClass: "card-text" }, [

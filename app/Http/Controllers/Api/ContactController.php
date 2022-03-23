@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Api;
 use App\Contact;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
-{
+{   
 
     protected $contactValidation = [
         'contact_name' => 'required|min:5',
         'email' => 'required|email',
-        'content' => 'required'
+        'content' => 'required',
+        'attachment' => 'nullable|file'
     ];
 
     /**
@@ -45,10 +47,17 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request->all());
+
         $data = $request->validate($this->contactValidation);
 
         $newContact = new Contact();
         $newContact->fill($data);
+
+        if(key_exists('attachment', $data)) {
+            $newContact->attachment = Storage::put('contactAttachments', $data['attachment']);
+        }
 
         $newContact->save();
     }

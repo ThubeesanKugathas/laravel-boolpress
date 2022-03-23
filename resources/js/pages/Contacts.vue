@@ -16,6 +16,11 @@
         <textarea class="form-control" aria-label="Content" v-model="formData.content"></textarea>
       </div>
 
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Attachment</span>
+        <input type="file" class="form-control" placeholder="Attachment" aria-label="Attachment" aria-describedby="basic-addon1" @change="onChangeAttachmentFile">
+      </div>
+
       <div>
         <button type="submit" class="btn btn-success" @click="submitContent">Save</button>
       </div>
@@ -32,13 +37,26 @@ export default {
         contact_name: "",
         email: "",
         content: "",
+        attachment: null,
       },
     };
   },
   methods: {
     async submitContent() {
-      const response = await axios.post("/api/contacts", this.formData);
 
+      const formDataInstance = new FormData();
+      formDataInstance.append('contact_name', this.formData.contact_name);
+      formDataInstance.append('email', this.formData.email);
+      formDataInstance.append('content', this.formData.content);
+      formDataInstance.append('attachment', this.formData.attachment);
+
+      const response = await axios.post("/api/contacts", formDataInstance);
+
+    },
+    onChangeAttachmentFile(event) {
+      // event.target.files
+
+      this.formData.attachment = event.target.files[0];
     }
   },
 }

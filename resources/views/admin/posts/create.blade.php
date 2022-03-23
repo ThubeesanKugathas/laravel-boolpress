@@ -10,7 +10,7 @@
 
             <div class="card-body">
 
-                <form action="{{ route('admin.posts.store') }}" method="post">
+                <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
@@ -29,9 +29,17 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label>Image</label>
                         <input type="text" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image')}}" required>
+                        @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div> --}}
+
+                    <div class="mb-3">
+                        <label>Image</label>
+                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" required>
                         @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <h1 class="card-title">{{ post.title }}</h1>
-        <img :src="`https://unsplash.it/600/300?image=${post.image}`" class="card-img-top" alt="">
+        <img :src="post.image" class="card-img-top" alt="">
         <p class="card-text">Content: {{ post.content }}</p>
         <p class="card-text">By: {{ post.user.name }}</p>
         <p class="card-text">{{ post.category.categoryName }}</p>

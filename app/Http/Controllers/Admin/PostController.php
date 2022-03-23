@@ -9,7 +9,7 @@ use App\Tag;
 use App\Traits\SlugGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {   
@@ -21,7 +21,7 @@ class PostController extends Controller
         'content' => 'required|min:20',
         'category_id' => 'nullable',
         'tags' => 'nullable',
-        'image' => 'nullable'
+        'image' => 'nullable|image|max:500'
     ];
 
     /**
@@ -62,6 +62,10 @@ class PostController extends Controller
         $newPost->fill($data);
         $newPost->slug = $this->generateSlug($data['title']);
         $newPost->user_id = Auth::user()->id;
+
+        if (key_exists('image', $data)) {
+            $newPost->image  = Storage::put('postCovers', $data['image']);
+        }
 
         $newPost->save();
 
@@ -110,23 +114,37 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
-    {
+    {   
+        // dd($request->all());
+
         $data = $request->validate($this->postValidation);
 
         $post->update($data);
-
-        if (key_exists('tags', $data) && count($data['tags']) !== 0) {
-
-            $post->tags()->detach();
-
-            $post->tags()->attach($data['tags']);
-
-            // $post->tags()->sync($data['tags']);
         
+        if (key_exists('image', $data)) {
+            if($post->image) {
+                Storage::delete($post->image);
+            }
+
+            $image = Storage::put('postCovers', $data['image']);
+            
+            $post->image = $image;
+            $post->save();
+        }
+        
+        
+        if (key_exists('tags', $data) && count($data['tags']) !== 0) {
+            
+            $post->tags()->detach();
+            
+            $post->tags()->attach($data['tags']);
+            
+            // $post->tags()->sync($data['tags']);
+            
         } else {
             $post->tags()->sync([]);
         }
-
+        
         // dd($post);
 
         return redirect()->route('admin.posts.show', $post->slug);

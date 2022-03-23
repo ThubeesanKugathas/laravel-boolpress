@@ -42,10 +42,10 @@
                              --none-- 
                         @endforelse
 
-                        @if($post->image !== null)
+                        @if($post->image)
                             <br>
                             <h4>Photo:</h4>
-                            <img src="https://unsplash.it/600/300?image={{ $post->image }}" alt="image">
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="image">
                         @endif
                     </div>
                 </div>

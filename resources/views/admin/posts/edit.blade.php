@@ -10,7 +10,7 @@
 
             <div class="card-body">
 
-                <form action="{{ route('admin.posts.update', $post->id) }}" method="post">
+                <form action="{{ route('admin.posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('put')
 
@@ -30,9 +30,17 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label>Image</label>
                         <input type="text" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ $post->image }}" required>
+                        @error('image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div> --}}
+                    
+                    <div class="mb-3">
+                        <label>Image</label>
+                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" required>
                         @error('image')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -59,6 +67,7 @@
                         </div>
                         @endforeach
                     </div>
+
 
                     <div>
                         <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">Reset</a>
