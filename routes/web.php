@@ -28,6 +28,7 @@ Route::middleware('auth')
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('posts', 'PostController');
         Route::resource('deleted', 'DeletedController');
+        Route::resource('contacts', 'ContactController');
         // Route::get('posts/deleted', 'PostController@indexDeleted');
     });
 
