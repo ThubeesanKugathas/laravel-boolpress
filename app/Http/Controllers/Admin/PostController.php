@@ -30,10 +30,14 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $posts = Post::all();
         
         return view('admin.posts.index', compact('posts'));
+
+        // $deletedPosts = Post::onlyTrashed();
+
+        // return view('admin.deletedPosts.index', compact('deletedPosts'));
     }
 
     /**
@@ -164,4 +168,5 @@ class PostController extends Controller
 
         return redirect()->route('admin.posts.index');
     }
+
 }

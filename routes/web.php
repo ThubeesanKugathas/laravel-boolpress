@@ -27,10 +27,11 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('posts', 'PostController');
+        Route::resource('deleted', 'DeletedController');
         Route::resource('contacts', 'ContactController');
+        // Route::get('posts/deleted', 'PostController@indexDeleted');
     });
 
-//  todo after rivisto tutta la lezione
 
 Route::get("{any?}", function() {
     return view("home");
