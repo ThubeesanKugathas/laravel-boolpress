@@ -158,7 +158,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->tags()->detach();
+        // $post->tags()->detach();
 
         $post->delete();
 

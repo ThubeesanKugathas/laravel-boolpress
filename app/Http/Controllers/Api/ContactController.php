@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Contact;
 use App\Http\Controllers\Controller;
+use App\Mail\SendNewMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
@@ -60,6 +62,9 @@ class ContactController extends Controller
         }
 
         $newContact->save();
+
+        Mail::to('admin@gmail.com')
+            ->send(new SendNewMail($newContact));
     }
 
     /**

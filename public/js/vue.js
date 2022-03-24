@@ -2109,7 +2109,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formDataInstance.append('contact_name', _this.formData.contact_name);
                 formDataInstance.append('email', _this.formData.email);
                 formDataInstance.append('content', _this.formData.content);
-                formDataInstance.append('attachment', _this.formData.attachment);
+
+                if (_this.formData.attachment) {
+                  formDataInstance.append('attachment', _this.formData.attachment);
+                }
+
                 _context.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", formDataInstance);
 
