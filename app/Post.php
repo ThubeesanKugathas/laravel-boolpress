@@ -11,7 +11,6 @@ class Post extends Model
         'content',
         'category_id',
         'slug',
-        'image',
     ];
 
     public function user() {
