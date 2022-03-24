@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
 
-use function GuzzleHttp\Promise\each;
-
 class DeletedController extends Controller
 {
     /**
@@ -21,6 +19,7 @@ class DeletedController extends Controller
 
         return view('admin.deleted.index', compact('deletedPosts'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -85,6 +84,20 @@ class DeletedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::withTrashed()->findOrFail($id);
+
+        $post->tags()->detach();
+
+        $post->forceDelete();
+
+        return redirect()->route('admin.deleted.index');
     }
+
+    // public function restore($id) {
+    //     $post = Post::withTrashed()->findOrFail($id);
+
+    //     $post->restore();
+
+    //     return redirect()->route('admin.deleted.index');
+    // }
 }

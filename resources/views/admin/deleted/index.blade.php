@@ -27,12 +27,11 @@
                                 @empty
                                     --none-- 
                                 @endforelse
-                                {{-- <a href="{{ route('admin.deleteddeletedPosts.show', $deletedPost->slug) }}" class="ms-auto me-3"><i class="fa-solid fa-eye" title="Details"></i></a>
-                                <a href="{{ route('admin.deleteddeletedPosts.edit', $deletedPost->slug) }}" class="me-3"><i class="fa-solid fa-pen-to-square" title="Change"></i></i></a>
+                                {{-- <a href="{{ route('admin.deleted.restore') }}" class="me-3">Restore</a> --}}
                                 @include('admin.partials.deleteLinks', [
-                                    "route" => 'admin.deleteddeletedPosts.destroy',
+                                    "route" => 'admin.deleted.destroy',
                                     "id" => $deletedPost->id
-                                ]) --}}
+                                ])
                             </li>
                         @endforeach
                     </ul>
